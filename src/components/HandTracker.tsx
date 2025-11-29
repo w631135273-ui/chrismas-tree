@@ -159,7 +159,8 @@ export const HandTracker = () => {
                             const distToWrist = Math.sqrt(Math.pow(tip.x - wrist.x, 2) + Math.pow(tip.y - wrist.y, 2));
                             const distToMCP = Math.sqrt(Math.pow(tip.x - mcp.x, 2) + Math.pow(tip.y - mcp.y, 2));
 
-                            if (distToWrist < 0.15 || distToMCP < 0.1) {
+                            // Relaxed thresholds for easier fist detection
+                            if (distToWrist < 0.2 || distToMCP < 0.15) {
                                 curledFingers++;
                             }
                         }
@@ -167,7 +168,7 @@ export const HandTracker = () => {
                         const thumbTip = landmarks[4];
                         const indexMCP = landmarks[5];
                         const thumbDist = Math.sqrt(Math.pow(thumbTip.x - indexMCP.x, 2) + Math.pow(thumbTip.y - indexMCP.y, 2));
-                        if (thumbDist < 0.1) curledFingers++;
+                        if (thumbDist < 0.15) curledFingers++; // Relaxed thumb threshold
 
                         const isFist = curledFingers >= 4;
                         const isOpen = curledFingers <= 1;
@@ -273,7 +274,8 @@ export const HandTracker = () => {
                 <span className="text-[10px] opacity-75">{debugInfo}</span>
             </div>
 
-            <div className="relative w-48 h-36 rounded-lg border-2 border-white/20 bg-gray-900 shadow-2xl overflow-hidden">
+            {/* Increased Size: w-72 h-54 (approx 1.5x larger) */}
+            <div className="relative w-72 h-54 rounded-lg border-2 border-white/20 bg-gray-900 shadow-2xl overflow-hidden">
                 <video
                     ref={videoRef}
                     playsInline

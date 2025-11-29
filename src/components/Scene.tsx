@@ -19,9 +19,9 @@ const CameraController = () => {
         // Tree: Further back to see full tree
         // Scattered: Closer for immersive feel
         if (mode === 'tree') {
-            targetPos.current.set(0, 0, 28);
+            targetPos.current.set(0, 0, 50); // Further back to see full tree
         } else {
-            targetPos.current.set(0, 0, 18);
+            targetPos.current.set(0, 0, 45); // Further back to see explosion cloud (was 18)
         }
 
         camera.position.lerp(targetPos.current, delta * 1.5);
